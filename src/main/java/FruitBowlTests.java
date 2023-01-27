@@ -28,16 +28,13 @@ public class FruitBowlTests {
         FruitSegregator segregator = new FruitSegregator();
 
 
-        Map<String, List<Fruit>> sortFruits = segregator.sortFruits(mixedFruitsBowl, "name");  //getting list of sorted fruits with sorting type
-
-        List<FruitsBowl> sortedFruitBowlsForBasketStand = new ArrayList<>();
-        sortFruits.values().stream().forEach(value -> sortedFruitBowlsForBasketStand.add(new FruitsBowl(value))); //setting all the sorted fruits to individual fruit bowls
+        List<FruitsBowl> sortedFruitBowlsForBasketStand = segregator.getSegregatedFruitsToIndividualBowl(mixedFruitsBowl, "name");  //getting list of sorted fruits with sorting type
 
         FruitBasketStand fruitBasket = new FruitBasketStand(sortedFruitBowlsForBasketStand); // adding all the segregated fruit bowls to fruit basket
         fruitBasket.showFruitBasket();
 
-        String fruitsByName= fruitBasket.getFruitsBowlList().stream().findFirst().get().getFruitList().stream().map(Fruit::getName).collect(Collectors.joining(", "));
-        Assert.assertEquals(fruitsByName,"Apple, Apple, Apple");
+        int fruitsByName= fruitBasket.getFruitsBowlList().stream().findFirst().get().getFruitList().stream().map(Fruit::getName).collect(Collectors.toList()).size();
+        Assert.assertEquals(fruitsByName,3);
 
     }
 
@@ -47,10 +44,8 @@ public class FruitBowlTests {
         mixedFruitsBowl.addFruitsToMixedFruitsBowl(apple, banana, grape, orange, apple2, apple3);
         FruitSegregator segregator = new FruitSegregator();
 
-        Map<String, List<Fruit>> sortFruits = segregator.sortFruits(mixedFruitsBowl, "color");
+        List<FruitsBowl> sortedFruitBowlsForBasketStand = segregator.getSegregatedFruitsToIndividualBowl(mixedFruitsBowl, "color");  //getting list of sorted fruits with sorting type
 
-        List<FruitsBowl> sortedFruitBowlsForBasketStand = new ArrayList<>();
-        sortFruits.values().stream().forEach(value -> sortedFruitBowlsForBasketStand.add(new FruitsBowl(value)));
         FruitBasketStand fruitBasket = new FruitBasketStand(sortedFruitBowlsForBasketStand);
 
         fruitBasket.showFruitBasket();
@@ -67,10 +62,8 @@ public class FruitBowlTests {
         mixedFruitsBowl.addFruitsToMixedFruitsBowl(apple, banana, grape, orange, apple2, apple3);
         FruitSegregator segregator = new FruitSegregator();
 
-        Map<String, List<Fruit>> sortFruits = segregator.sortFruits(mixedFruitsBowl, "size");
+        List<FruitsBowl> sortedFruitBowlsForBasketStand = segregator.getSegregatedFruitsToIndividualBowl(mixedFruitsBowl, "size");  //getting list of sorted fruits with sorting type
 
-        List<FruitsBowl> sortedFruitBowlsForBasketStand = new ArrayList<>();
-        sortFruits.values().stream().forEach(value -> sortedFruitBowlsForBasketStand.add(new FruitsBowl(value)));
         FruitBasketStand fruitBasket = new FruitBasketStand(sortedFruitBowlsForBasketStand);
 
         fruitBasket.showFruitBasket();

@@ -1,11 +1,13 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FruitSegregator {
 
+    private Map<String, List<Fruit>> sortedFruits;
+
     public Map<String, List<Fruit>> sortFruits(FruitsBowl mixedFruitsBowl, String sortType) {
-        Map<String, List<Fruit>> sortedFruits;
         switch (sortType) {
 
             case "color":
@@ -32,4 +34,14 @@ public class FruitSegregator {
         }
         return sortedFruits;
     }
+
+
+
+    public List<FruitsBowl> getSegregatedFruitsToIndividualBowl(FruitsBowl mixedFruitsBowl, String sortType){
+        sortedFruits = sortFruits(mixedFruitsBowl, sortType);
+        List<FruitsBowl> sortedFruitBowlsForBasketStand = new ArrayList<>();
+        sortedFruits.values().stream().forEach(value -> sortedFruitBowlsForBasketStand.add(new FruitsBowl(value))); //setting all the sorted fruits to individual fruit bowls
+        return sortedFruitBowlsForBasketStand;
+    }
+
 }
